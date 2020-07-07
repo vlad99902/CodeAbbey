@@ -1,0 +1,14 @@
+Author's notes on this problem
+There could be different approaches to this task, but most effective is to use the stack data structure (for example Python lists could work as stack with .append() and .pop() methods).
+
+With it the algorithm becames straightforward:
+
+loop through all characters of a string sequentially;
+skip non-bracket characters, they are not interesting;
+if you found an opening bracket, push it to the stack;
+if you found a closing bracket, pop the character from the stack.
+To verify correctness of the bracket sequence, check the following conditions:
+
+Every character popped out should correspond to current character from sequence. I.e. if the current character is the ")" then the character on the top of the stack which you will pop should be "(".
+If you need to pop a character but stack is empty - it is obviously signal of an error in the sequence.
+When you will finish the sequence, the stack should appear empty - otherwise it is the error of having more opening brackets than closing ones.
