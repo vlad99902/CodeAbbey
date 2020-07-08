@@ -50,24 +50,20 @@ int roundHalfDown(const int fistNumber, const int secondNumber){
  */
 void mergeArray (int* array, size_t start, size_t center, size_t end){
     
-    
-    
-    start--;
-    center--;
-    end--;
-    
     /*
      Variables and buffer array to merge data
      */
+    
     int* arrayResult = new int [end];
-    size_t iteratorFirst = start;
-    size_t iteratorSecond = center + 1;
-    size_t i = start;
+    size_t iteratorFirst = start - 1;
+    size_t iteratorSecond = center;
+    size_t i = start - 1;
     
     /*
      Compare elements by part of arrays
      */
-    while (iteratorFirst <= center && iteratorSecond <= end) {
+    
+    while (iteratorFirst < center && iteratorSecond < end) {
         if (array[iteratorFirst] < array[iteratorSecond]){
             arrayResult[i] = array[iteratorFirst];
             iteratorFirst++;
@@ -82,12 +78,12 @@ void mergeArray (int* array, size_t start, size_t center, size_t end){
      If elements of array parts are over
      */
 
-    while (iteratorSecond <= end) {
+    while (iteratorSecond < end) {
         arrayResult[i] = array[iteratorSecond];
         iteratorSecond++;
         i++;
     }
-    while (iteratorFirst <= center) {
+    while (iteratorFirst < center) {
         arrayResult[i] = array[iteratorFirst];
         iteratorFirst++;
         i++;
@@ -97,12 +93,14 @@ void mergeArray (int* array, size_t start, size_t center, size_t end){
      rewrite elements from buffer to main array
      */
     
-    for (size_t j = start; j < i; j++){
+    for (size_t j = start - 1; j < i; j++){
         array[j] = arrayResult[j];
     }
 }
 
-
+/*
+ Merge sort method
+ */
 
 void finalSort (int* array, const int start, const int end){
     if (start < end) {
@@ -116,11 +114,11 @@ void finalSort (int* array, const int start, const int end){
 
 
 int main(int argc, const char * argv[]) {
-    const int length = 100;
+    const int length = 1000;
     int* array = new int [length];
     for (int i = 0; i < length; i++){
-        array[i] = rand()%1000+1;
-       // array[i] = length - i;
+        array[i] = rand()%100000+1;
+      //  array[i] = length - i;
     }
     
     int* buffer = new int [length];
