@@ -102,22 +102,30 @@ void mergeArray (int* array, size_t start, size_t center, size_t end){
  Merge sort method
  */
 
-void finalSort (int* array, const int start, const int end){
+void mergeSort (int* array, size_t start, size_t end){
     if (start < end) {
-        int q = start + (end-start) / 2;
-        finalSort(array, start, q);
-        finalSort(array, q + 1, end);
+        size_t q = start + (end-start) / 2;
+        mergeSort(array, start, q);
+        mergeSort(array, q + 1, end);
         mergeArray(array, start, q, end);
     }
 }
 
+/*
+ Example of calling method like in the task
+ 
+ mergeSort(array, 1, length);
+ 
+ start sort element is 1
+ last sort element is array length
+ */
 
 
 int main(int argc, const char * argv[]) {
     const int length = 1000;
     int* array = new int [length];
     for (int i = 0; i < length; i++){
-        array[i] = rand()%100000+1;
+        array[i] = rand() % 100000+1;
       //  array[i] = length - i;
     }
     
@@ -127,7 +135,7 @@ int main(int argc, const char * argv[]) {
     }
     std::cout << "start array ";
     printArray(array, length);
-    finalSort(array, 1, length);
+    mergeSort(array, 1, length);
     std::cout << "end's array ";
     printArray(array, length);
 
