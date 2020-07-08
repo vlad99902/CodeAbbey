@@ -24,7 +24,7 @@
 
 /* Begin PBXFileReference section */
 		6EB55D2E24B4E138003F5980 /* test task project05 bisness technologyes */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "test task project05 bisness technologyes"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6EB55D3124B4E138003F5980 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		6EB55D3124B4E138003F5980 /* main.cpp */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
