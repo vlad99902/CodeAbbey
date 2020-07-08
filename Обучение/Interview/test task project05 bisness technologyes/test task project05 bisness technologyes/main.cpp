@@ -45,89 +45,94 @@ int roundHalfDown(const int fistNumber, const int secondNumber){
     return floor(fistNumber+secondNumber/2);
 }
 
+/*
+ Method to merge information by two arrays
+ */
 void mergeArray (int* array, size_t start, size_t center, size_t end){
-  //  if (start != 0) start--;
-    if (start - end == -1 || start - center == 0 || center - end == 0) return;
     
-    std::cout << "\nmerge method called\n\n\t iterator first: " << start << " iterator second: " << center << " end's: " << end << std::endl;
     
+    
+    start--;
+    center--;
+    end--;
+    
+    /*
+     Variables and buffer array to merge data
+     */
     int* arrayResult = new int [end];
     size_t iteratorFirst = start;
-    size_t iteratorSecond = center;
+    size_t iteratorSecond = center + 1;
     size_t i = start;
     
-    printArray(array, end);
-    std::cout << "\n\t iterator first: " << iteratorFirst << " iterator second: " << iteratorSecond << std::endl;
-    while (iteratorFirst < center && iteratorSecond < end) {
-        std::cout << "\ni: "<< i <<" iterator first: " << iteratorFirst << " iterator second: " << iteratorSecond << std::endl;
-        if (array[iteratorFirst] <= array[iteratorSecond]){
+    /*
+     Compare elements by part of arrays
+     */
+    while (iteratorFirst <= center && iteratorSecond <= end) {
+        if (array[iteratorFirst] < array[iteratorSecond]){
             arrayResult[i] = array[iteratorFirst];
             iteratorFirst++;
-            i++;
         } else{
-           // std::cout << "\non, no!\n";
             arrayResult[i] = array[iteratorSecond];
             iteratorSecond++;
-            i++;
         }
-    }
-    std::cout << "\n\t iterator first: " << iteratorFirst << " iterator second: " << iteratorSecond << std::endl;
-    // if array's part end's
-    if (iteratorFirst != center) {
-        while (iteratorSecond != end) {
-            arrayResult[i] = array[iteratorSecond];
-            iteratorSecond++;
-            i++;
-        }
+        i++;
     }
     
-    if (iteratorSecond == end) {
-        while (iteratorFirst != center) {
-            arrayResult[i] = array[iteratorFirst];
-            iteratorFirst++;
-            i++;
-        }
+    /*
+     If elements of array parts are over
+     */
+
+    while (iteratorSecond <= end) {
+        arrayResult[i] = array[iteratorSecond];
+        iteratorSecond++;
+        i++;
+    }
+    while (iteratorFirst <= center) {
+        arrayResult[i] = array[iteratorFirst];
+        iteratorFirst++;
+        i++;
     }
     
-    std::cout << "\n\t iterator first: " << iteratorFirst << " iterator second: " << iteratorSecond << std::endl;
+    /*
+     rewrite elements from buffer to main array
+     */
     
-    printArray(arrayResult, end);
-    for (size_t i = start; i < end; i++){
-        array[i] = arrayResult[i];
+    for (size_t j = start; j < i; j++){
+        array[j] = arrayResult[j];
     }
-        
 }
+
+
 
 void finalSort (int* array, const int start, const int end){
     if (start < end) {
         int q = start + (end-start) / 2;
         finalSort(array, start, q);
         finalSort(array, q + 1, end);
-        std::cout << "merge called: " << start << "  " << q << "  " << end << std::endl;
         mergeArray(array, start, q, end);
     }
-    
-    std::cout << "\n--------\n";
 }
 
+
+
 int main(int argc, const char * argv[]) {
-    const int length = 10;
+    const int length = 100;
     int* array = new int [length];
     for (int i = 0; i < length; i++){
-        array[i] = rand()%100+1;
+        array[i] = rand()%1000+1;
        // array[i] = length - i;
+    }
+    
+    int* buffer = new int [length];
+    for (size_t i = 0; i < length; i++){
+        buffer[i] = array[i];
     }
     std::cout << "start array ";
     printArray(array, length);
-    //sort(array, 1, length);
-    //printArray(array, length);
-    //std::cout << roundHalfDown(0, length);
-    
-    // mergeArray(array, 0, roundHalfDown(0, length), length);
-   // printArray(array, length);
-    finalSort(array, 0, length);
+    finalSort(array, 1, length);
     std::cout << "end's array ";
     printArray(array, length);
+
     delete [] array;
     return 0;
 }
